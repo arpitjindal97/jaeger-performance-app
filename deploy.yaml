@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: jaeger-performance
+spec:
+  activeDeadlineSeconds: 300
+  template:
+    metadata:
+      name: jaeger-performance
+    spec:
+      containers:
+      - name: jaeger-performance
+        image: docker.io/arpitjindal1997/jaeger-performance:latest
+        imagePullPolicy: Always
+        env:
+        - name: CUSTOMER_NAMES
+          value: ["cust1","cust2"]
+        - name: DOMAIN
+          value: "ingress.example.com"
+        - name: THREAD_NUM
+          value: 100
+        resources:
+          {}
+      restartPolicy: Never
